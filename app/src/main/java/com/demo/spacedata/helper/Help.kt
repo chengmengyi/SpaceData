@@ -33,6 +33,8 @@ fun transTime(t:Long):String{
 }
 
 fun getFlagIcon(string:String)=when(string){
+    "Australia"-> R.drawable.australia
+    "Japan"-> R.drawable.japan
     else -> R.drawable.fast
 }
 
