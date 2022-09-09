@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/connect_progress.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/launch_progress.xml" value="0.2601851851851852" />
+        <entry key="app/src/main/res/drawable/server_selector.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/layout/ac_0906_connect.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/ac_0906_launch.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/ac_0906_result.xml" value="0.20244565217391305" />
+        <entry key="app/src/main/res/layout/ac_0906_server.xml" value="0.20244565217391305" />
+        <entry key="app/src/main/res/layout/ac_0906_set.xml" value="0.20244565217391305" />
+        <entry key="app/src/main/res/layout/ac_0906_webview.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/layout_0906_server_item.xml" value="0.20244565217391305" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.25555555555555554" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
