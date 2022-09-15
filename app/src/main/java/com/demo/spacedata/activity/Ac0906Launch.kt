@@ -7,23 +7,40 @@ import android.view.animation.LinearInterpolator
 import androidx.core.animation.doOnEnd
 import com.blankj.utilcode.util.ActivityUtils
 import com.demo.spacedata.R
+import com.demo.spacedata.admob0906.Ad0907Loca
+import com.demo.spacedata.admob0906.Load0906AdManager
+import com.demo.spacedata.admob0906.Show0906Open
 import com.demo.spacedata.base.AcBase0906
 import kotlinx.android.synthetic.main.ac_0906_launch.*
 
 class Ac0906Launch : AcBase0906(R.layout.ac_0906_launch) {
     private var launch0906Animator: ValueAnimator?=null
+    private val showopen by lazy { Show0906Open(this,Ad0907Loca.OPEN){toConnectAc()} }
 
     override fun viewCreated() {
+        Load0906AdManager.preLoad(Ad0907Loca.OPEN)
+        Load0906AdManager.preLoad(Ad0907Loca.CONNECT)
+        Load0906AdManager.preLoad(Ad0907Loca.HOME)
+        Load0906AdManager.preLoad(Ad0907Loca.RESULT)
+
         launch0906Animator=ValueAnimator.ofInt(0, 100).apply {
-            duration=2000L
+            duration=10000L
             interpolator = LinearInterpolator()
             addUpdateListener {
                 val progress = it.animatedValue as Int
                 launch_progress.progress = progress
+                val du = (10 * (progress / 100.0F)).toInt()
+                if (du in 2..9){
+                    if (Load0906AdManager.getAdRes(Ad0907Loca.OPEN)!=null){
+                        stopAnimator()
+                        launch_progress.progress = 100
+                        showopen.show()
+                    }
+                }else if (du>=10){
+                    toConnectAc()
+                }
             }
-            doOnEnd {
-                toConnectAc()
-            }
+
             start()
         }
     }

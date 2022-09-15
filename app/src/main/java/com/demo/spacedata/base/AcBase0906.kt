@@ -16,6 +16,7 @@ import java.lang.Exception
 abstract class AcBase0906(
     private val resId:Int
 ):AppCompatActivity() {
+    var resume=false
     protected lateinit var immer:ImmersionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +33,24 @@ abstract class AcBase0906(
     }
 
     abstract fun viewCreated()
+
+
+    override fun onResume() {
+        super.onResume()
+        resume=true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        resume=false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        resume=false
+    }
+
+
 
     fun getNetWorkStatus(): Int {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -85,4 +104,5 @@ abstract class AcBase0906(
         )
         startActivity(Intent.createChooser(intent, "share"))
     }
+
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.DisplayMetrics
+import android.util.Log
 import com.demo.spacedata.R
 import com.demo.spacedata.bean.Server0906Bean
 import com.demo.spacedata.conf.Conf0906
@@ -44,4 +45,9 @@ fun getFlagName(server0906Bean: Server0906Bean):String{
     }else{
         "${server0906Bean.country_space_0906} - ${server0906Bean.city_space_0906}"
     }
+}
+
+
+fun logDog(s:String){
+    Log.e("qwer",s)
 }

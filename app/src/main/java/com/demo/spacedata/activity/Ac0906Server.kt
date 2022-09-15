@@ -5,14 +5,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.spacedata.R
 import com.demo.spacedata.adapter.Server0906Adapter
+import com.demo.spacedata.admob0906.Ad0907Loca
+import com.demo.spacedata.admob0906.Load0906AdManager
+import com.demo.spacedata.admob0906.Show0906Open
 import com.demo.spacedata.base.AcBase0906
 import com.demo.spacedata.bean.Server0906Bean
 import com.demo.spacedata.server.Connect0906Manager
 import kotlinx.android.synthetic.main.ac_0906_server.*
 
 class Ac0906Server:AcBase0906(R.layout.ac_0906_server) {
+    private val showconnect by lazy { Show0906Open(this, Ad0907Loca.BACK){finish()} }
+
+
     override fun viewCreated() {
         immer.statusBarView(view)?.init()
+        Load0906AdManager.preLoad(Ad0907Loca.BACK)
 
         val list= arrayListOf<Server0906Bean>()
         list.add(Connect0906Manager.createFastServerBean())
@@ -25,7 +32,7 @@ class Ac0906Server:AcBase0906(R.layout.ac_0906_server) {
             }
         }
 
-        iv_back.setOnClickListener { finish() }
+        iv_back.setOnClickListener { onBackPressed() }
     }
 
     private fun clickServer(server0906Bean: Server0906Bean){
@@ -66,6 +73,15 @@ class Ac0906Server:AcBase0906(R.layout.ac_0906_server) {
         setResult(906,Intent().apply {
             putExtra("status",status)
         })
+        finish()
+    }
+
+    override fun onBackPressed() {
+        val adRes = Load0906AdManager.getAdRes(Ad0907Loca.BACK)
+        if (adRes!=null){
+            showconnect.show()
+            return
+        }
         finish()
     }
 }

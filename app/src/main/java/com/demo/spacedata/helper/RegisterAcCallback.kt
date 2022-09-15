@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.blankj.utilcode.util.ActivityUtils
 import com.demo.spacedata.activity.Ac0906Connect
 import com.demo.spacedata.activity.Ac0906Launch
+import com.google.android.gms.ads.AdActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -55,7 +56,7 @@ object RegisterAcCallback {
                     delay(3000L)
                     pass3s=true
                     ActivityUtils.finishActivity(Ac0906Launch::class.java)
-//                    ActivityUtils.finishActivity(AdActivity::class.java)
+                    ActivityUtils.finishActivity(AdActivity::class.java)
                 }
             }
         }

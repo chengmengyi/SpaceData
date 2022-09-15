@@ -66,4 +66,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/iv_result_bg"/>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="314dp"
+        android:layout_margin="20dp"
+        layout="@layout/layout_result_ad"
+        app:layout_constraintTop_toBottomOf="@id/tv_result_connect_status"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

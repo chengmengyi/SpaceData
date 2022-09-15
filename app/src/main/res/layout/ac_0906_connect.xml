@@ -100,4 +100,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/iv_connect_center"  />
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="211dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        layout="@layout/layout_home_ad"
+        app:layout_constraintTop_toBottomOf="@id/tv_connect_status"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

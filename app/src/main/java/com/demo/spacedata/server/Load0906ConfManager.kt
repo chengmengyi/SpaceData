@@ -9,20 +9,73 @@ import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 object Load0906ConfManager {
+
+    var showingOpen=false
+
+    val cList= arrayListOf<String>()
+    val sList= arrayListOf<Server0906Bean>()
 
     fun loadConf(){
         saveStatusJson(Conf0906.JSON)
         createServerId(Conf0906.localServer)
+        
 
 
 //        val remoteConfig = Firebase.remoteConfig
 //        remoteConfig.fetchAndActivate().addOnCompleteListener {
 //            if (it.isSuccessful){
 //                saveStatusJson(remoteConfig.getString("space_0906_status"))
+//                loadCList(remoteConfig.getString("space0906_city"))
+//                loadSList(remoteConfig.getString("space0906_server"))
+//                loadAdStr(remoteConfig.getString("space0906_ad"))
 //            }
 //        }
+    }
+
+    private fun loadCList(s:String){
+        try {
+            cList.clear()
+            val jsonArray = JSONObject(s).getJSONArray("space0906_city")
+            for (index in 0 until jsonArray.length()){
+                cList.add(jsonArray.optString(index))
+            }
+        }catch (e:Exception){
+
+        }
+    }
+    
+    private fun loadSList(s:String){
+        sList.clear()
+        try {
+            val jsonArray = JSONObject(s).getJSONArray("space0906_server")
+            for (index in 0 until jsonArray.length()){
+                val jsonObject = jsonArray.getJSONObject(index)
+                val server = Server0906Bean(
+                    jsonObject.optString("host_space0906"),
+                    jsonObject.optInt("port_space0906"),
+                    jsonObject.optString("pwd_space0906"),
+                    jsonObject.optString("country_space0906"),
+                    jsonObject.optString("city_space0906"),
+                    jsonObject.optString("method_space0906"),
+                )
+                sList.add(server)
+            }
+            createServerId(sList)
+        }catch (e:Exception){
+
+        }
+    }
+
+    private fun loadAdStr(s: String){
+        MMKV.defaultMMKV().encode("space0906_ad",s)
+    }
+    
+    fun getAdStr():String{
+        val ad = MMKV.defaultMMKV().decodeString("space0906_ad")
+        return if (ad.isNullOrEmpty()) Conf0906.AD_0906 else ad
     }
 
     private fun saveStatusJson(string: String){

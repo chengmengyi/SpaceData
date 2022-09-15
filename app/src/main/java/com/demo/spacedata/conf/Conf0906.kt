@@ -33,5 +33,109 @@ class Conf0906 {
             ),
         )
 
+
+        const val AD_0906="""{
+    "space_0906_open": [
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/3419835294",
+            "space_0906_type": "cping",
+            "space_0906_sort": 1
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/3419835294A",
+            "space_0906_type": "kping",
+            "space_0906_sort": 2
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/3419835294AA",
+            "space_0906_type": "kping",
+            "space_0906_sort": 3
+        }
+    ],
+    "space_0906_home": [
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/2247696110",
+            "space_0906_type": "ysheng",
+            "space_0906_sort": 2
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/2247696110AAA",
+            "space_0906_type": "ysheng",
+            "space_0906_sort": 1
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/2247696110AA",
+            "space_0906_type": "ysheng",
+            "space_0906_sort": 3
+        }
+    ],
+    "space_0906_result": [
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/2247696110A",
+            "space_0906_type": "ysheng",
+            "space_0906_sort": 2
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/2247696110",
+            "space_0906_type": "ysheng",
+            "space_0906_sort": 1
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/2247696110AA",
+            "space_0906_type": "ysheng",
+            "space_0906_sort": 3
+        }
+    ],
+    "space_0906_connect": [
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/8691691433A",
+            "space_0906_type": "cping",
+            "space_0906_sort": 2
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/1033173712",
+            "space_0906_type": "cping",
+            "space_0906_sort": 1
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/1033173712AA",
+            "space_0906_type": "cping",
+            "space_0906_sort": 3
+        }
+    ],
+    "space_0906_back": [
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/1033173712A",
+            "space_0906_type": "cping",
+            "space_0906_sort": 2
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/8691691433",
+            "space_0906_type": "cping",
+            "space_0906_sort": 1
+        },
+        {
+            "space_0906_source": "admob",
+            "space_0906_id": "ca-app-pub-3940256099942544/1033173712AA",
+            "space_0906_type": "cping",
+            "space_0906_sort": 3
+        }
+    ]
+}"""
+
     }
 }

@@ -8,9 +8,11 @@ import com.demo.spacedata.server.Load0906ConfManager
 import com.github.shadowsocks.Core
 import com.tencent.mmkv.MMKV
 
+lateinit var mSpace:Space
 class Space:Application() {
     override fun onCreate() {
         super.onCreate()
+        mSpace=this
         Core.init(this,Ac0906Connect::class)
         MMKV.initialize(this)
         if (!packageName.equals(processName(this))){

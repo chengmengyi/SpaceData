@@ -7,6 +7,10 @@ import android.util.Log
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AlertDialog
 import com.demo.spacedata.R
+import com.demo.spacedata.admob0906.Ad0907Loca
+import com.demo.spacedata.admob0906.Load0906AdManager
+import com.demo.spacedata.admob0906.Show0906Home
+import com.demo.spacedata.admob0906.Show0906Open
 import com.demo.spacedata.base.AcBase0906
 import com.demo.spacedata.helper.RegisterAcCallback
 import com.demo.spacedata.helper.getFlagIcon
@@ -27,6 +31,9 @@ import kotlinx.coroutines.launch
 
 class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.Callback,IUpdateConnectTimeListener{
     private var loopCheckAnimator:ValueAnimator?=null
+    private val showconnect by lazy { Show0906Open(this, Ad0907Loca.CONNECT){intentResult()} }
+    private val showhome by lazy { Show0906Home(this,Ad0907Loca.HOME) }
+
 
     private val registerForActivityResult=registerForActivityResult(StartService()) {
         if (!it && Connect0906Manager.hasPer) {
@@ -64,10 +71,14 @@ class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.
     private fun clickConnectBtn(){
         if (Connect0906Manager.click){
             Connect0906Manager.click=false
+            Load0906AdManager.preLoad(Ad0907Loca.CONNECT)
+            Load0906AdManager.preLoad(Ad0907Loca.RESULT)
+
             val connected = Connect0906Manager.connected()
             if (connected){
                 doDisconnectLogic()
             }else{
+                updateServerInfo()
                 if (getNetWorkStatus()==1){
                     AlertDialog.Builder(this).apply {
                         setMessage("You are not currently connected to the network")
@@ -88,7 +99,6 @@ class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.
     }
 
     private fun doConnectLogic(){
-        updateServerInfo()
         Connect0906Manager.state=BaseService.State.Connecting
         GlobalScope.launch {
             if (Connect0906Manager.isFastServerBean(Connect0906Manager.currentServerBean)){
@@ -123,12 +133,15 @@ class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.
                 connect_progress.progress=i
                 val duration = (10 * (p / 100.0F)).toInt()
                 if (duration in 2..9){
-                    if (loopCheckSuccess()){
+                    val hadRes=Load0906AdManager.getAdRes(Ad0907Loca.CONNECT)!=null
+                    if (loopCheckSuccess()&&hadRes){
                         connect_progress.progress=if (connect) 100 else 0
                         stopLoopCheck()
-                        loopCheckCompleted()
+                        loopCheckCompleted(j=false)
+                        showconnect.show()
                     }
                 }else if (duration>=10){
+                    showhome.cancelJob()
                     loopCheckCompleted()
                 }
             }
@@ -136,7 +149,7 @@ class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.
         }
     }
 
-    private fun loopCheckCompleted(){
+    private fun loopCheckCompleted(j:Boolean=true){
         if (loopCheckSuccess()){
             if (Connect0906Manager.isConnect){
                 updateConnectedUI()
@@ -145,10 +158,8 @@ class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.
                 updateServerInfo()
                 updateConnectTime(0L)
             }
-            if (RegisterAcCallback.front0906){
-                startActivity(Intent(this,Ac0906Result::class.java).apply {
-                    putExtra("connect",Connect0906Manager.isConnect)
-                })
+            if (j){
+                intentResult()
             }
             Connect0906Manager.click=true
         }else{
@@ -156,6 +167,14 @@ class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.
             updateConnectTime(0L)
             updateStoppedUI()
             Connect0906Manager.click=true
+        }
+    }
+
+    private fun intentResult(){
+        if (RegisterAcCallback.front0906){
+            startActivity(Intent(this,Ac0906Result::class.java).apply {
+                putExtra("connect",Connect0906Manager.isConnect)
+            })
         }
     }
 
@@ -225,10 +244,16 @@ class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.
         if (requestCode==906){
             when(data?.getStringExtra("status")){
                 "0","1"->{
-
                     clickConnectBtn()
                 }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (RegisterAcCallback.refreshHomeNativeAd){
+            showhome.call()
         }
     }
 
@@ -236,6 +261,8 @@ class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.
         super.onDestroy()
         onBinderDied()
         stopLoopCheck()
+        showhome.cancelJob()
+        RegisterAcCallback.refreshHomeNativeAd=true
         Time0906Manager.removeIUpdateConnectTimeListener()
     }
 }

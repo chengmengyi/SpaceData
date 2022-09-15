@@ -19,9 +19,18 @@ object Connect0906Manager {
         lastServerBean= currentServerBean
     }
 
-    fun getServerList()= Conf0906.localServer
+    fun getServerList()= Load0906ConfManager.sList.ifEmpty { Conf0906.localServer }
 
-    fun getFastServerBean()= getServerList().random()
+    fun getFastServerBean():Server0906Bean{
+        val serverList = getServerList()
+        if (!Load0906ConfManager.cList.isNullOrEmpty()){
+            val filter = serverList.filter { Load0906ConfManager.cList.contains(it.city_space_0906) }
+            if (!filter.isNullOrEmpty()){
+                return filter.random()
+            }
+        }
+        return serverList.random()
+    }
 
     fun createFastServerBean() = Server0906Bean(country_space_0906 = "Faster server")
 
