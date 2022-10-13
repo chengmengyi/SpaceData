@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.demo.spacedata">
+    package="com.space.date.fast.tool.easy">
 
     <application
-        android:name=".Space"
+        android:name="com.space.date.fast.tool.easy.Space"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpaceData">
         <activity
-            android:name=".activity.Ac0906Launch"
+            android:name="com.space.date.fast.tool.easy.activity.Ac0906Launch"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,17 +19,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Ac0906Connect"
+        <activity android:name="com.space.date.fast.tool.easy.activity.Ac0906Connect"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
-        <activity android:name=".activity.Ac0906Server"
+        <activity android:name="com.space.date.fast.tool.easy.activity.Ac0906Server"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.Ac0906Result"
+        <activity android:name="com.space.date.fast.tool.easy.activity.Ac0906Result"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.Ac0906Set"
+        <activity android:name="com.space.date.fast.tool.easy.activity.Ac0906Set"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.Ac0906WebView"
+        <activity android:name="com.space.date.fast.tool.easy.activity.Ac0906WebView"
             android:screenOrientation="portrait"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     </application>
 
 </manifest>

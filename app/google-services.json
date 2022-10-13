@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "728342180341",
+    "project_id": "space-data-d89cb",
+    "storage_bucket": "space-data-d89cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728342180341:android:b9401e87aad7507cd9f0bc",
+        "android_client_info": {
+          "package_name": "com.space.date.fast.tool.easy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728342180341-j34qc2e8a93gp3m3llfoq506dk8ou8f2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiA0qoi4LuZe9_8gFA2pq3aLAdqnQRD4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728342180341-j34qc2e8a93gp3m3llfoq506dk8ou8f2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
