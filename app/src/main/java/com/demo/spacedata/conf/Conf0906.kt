@@ -35,6 +35,8 @@ class Conf0906 {
 
 
         const val AD_0906="""{
+                 "space_0906_click":15,
+    "space_0906_show":50,
     "space_0906_open": [
         {
             "space_0906_source": "admob",

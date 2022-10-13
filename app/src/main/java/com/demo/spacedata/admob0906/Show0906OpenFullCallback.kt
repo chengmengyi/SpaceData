@@ -22,6 +22,7 @@ class Show0906OpenFullCallback(
 
     override fun onAdShowedFullScreenContent() {
         super.onAdShowedFullScreenContent()
+        Load0906ConfManager.updateShowNum()
         Load0906ConfManager.showingOpen=true
         Load0906AdManager.removeAdRes(adloca)
     }
@@ -31,6 +32,11 @@ class Show0906OpenFullCallback(
         Load0906ConfManager.showingOpen=false
         Load0906AdManager.removeAdRes(adloca)
         showNext()
+    }
+
+    override fun onAdClicked() {
+        super.onAdClicked()
+        Load0906ConfManager.updateClickNum()
     }
 
     private fun showNext(){

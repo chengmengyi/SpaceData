@@ -133,12 +133,12 @@ class Ac0906Connect :AcBase0906(R.layout.ac_0906_connect),ShadowsocksConnection.
                 connect_progress.progress=i
                 val duration = (10 * (p / 100.0F)).toInt()
                 if (duration in 2..9){
-                    val hadRes=Load0906AdManager.getAdRes(Ad0907Loca.CONNECT)!=null
-                    if (loopCheckSuccess()&&hadRes){
-                        connect_progress.progress=if (connect) 100 else 0
-                        stopLoopCheck()
-                        loopCheckCompleted(j=false)
-                        showconnect.show()
+                    if (loopCheckSuccess()){
+                        showconnect.show{
+                            connect_progress.progress=if (connect) 100 else 0
+                            stopLoopCheck()
+                            loopCheckCompleted(j=it)
+                        }
                     }
                 }else if (duration>=10){
                     showhome.cancelJob()

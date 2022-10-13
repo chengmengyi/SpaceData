@@ -18,14 +18,19 @@ class Show0906Open(
     private val completed:()->Unit
 ) {
 
-    fun show(){
-        if (cannotShow()){
-            completed.invoke()
+    fun show(finish:(to:Boolean)->Unit){
+        val adRes = Load0906AdManager.getAdRes(adLoca)
+        if (adRes==null&&Load0906ConfManager.is0906AdLimit()){
+            finish.invoke(true)
             return
         }
-        val adRes = Load0906AdManager.getAdRes(adLoca)
-        adRes?.let {
+        if (adRes!=null){
+            if (cannotShow()){
+                finish.invoke(false)
+                return
+            }
             logDog("show $adLoca ad")
+            finish.invoke(false)
             Load0906ConfManager.showingOpen=true
             if (adRes is AppOpenAd){
                 adRes.fullScreenContentCallback=Show0906OpenFullCallback(acBase0906, adLoca, completed)
@@ -35,7 +40,6 @@ class Show0906Open(
                 adRes.fullScreenContentCallback=Show0906OpenFullCallback(acBase0906, adLoca, completed)
                 adRes.show(acBase0906)
             }
-
         }
     }
 

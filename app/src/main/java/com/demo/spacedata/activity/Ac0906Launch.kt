@@ -31,15 +31,18 @@ class Ac0906Launch : AcBase0906(R.layout.ac_0906_launch) {
                 launch_progress.progress = progress
                 val du = (10 * (progress / 100.0F)).toInt()
                 if (du in 2..9){
-                    if (Load0906AdManager.getAdRes(Ad0907Loca.OPEN)!=null){
+                    showopen.show{
                         stopAnimator()
                         launch_progress.progress = 100
-                        showopen.show()
+                        if (it){
+                            toConnectAc()
+                        }
                     }
                 }else if (du>=10){
                     toConnectAc()
                 }
             }
+            doOnEnd {  }
 
             start()
         }

@@ -10,6 +10,9 @@ import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 object Load0906ConfManager {
 
@@ -18,11 +21,17 @@ object Load0906ConfManager {
     val cList= arrayListOf<String>()
     val sList= arrayListOf<Server0906Bean>()
 
+
+    private var maxShow0906=15
+    private var maxClick0906=3
+
+    private var showed0906Num=0
+    private var clicked0906Num=0
+
     fun loadConf(){
         saveStatusJson(Conf0906.JSON)
         createServerId(Conf0906.localServer)
-        
-
+        read0906LocalNum()
 
 //        val remoteConfig = Firebase.remoteConfig
 //        remoteConfig.fetchAndActivate().addOnCompleteListener {
@@ -71,8 +80,36 @@ object Load0906ConfManager {
 
     private fun loadAdStr(s: String){
         MMKV.defaultMMKV().encode("space0906_ad",s)
+        try {
+            val jsonObject = JSONObject(s)
+            maxShow0906=jsonObject.optInt("space_0906_open")
+            maxClick0906=jsonObject.optInt("space_0906_show")
+        }catch (e:Exception){
+
+        }
     }
-    
+
+    private fun read0906LocalNum(){
+        clicked0906Num=MMKV.defaultMMKV().decodeInt(getLimit0906Key("clicked0906Num"),0)
+        showed0906Num=MMKV.defaultMMKV().decodeInt(getLimit0906Key("showed0906Num"),0)
+    }
+
+    private fun getLimit0906Key(type:String)="$type...${SimpleDateFormat("yyyy-MM-dd").format(Date(System.currentTimeMillis()))}"
+
+    fun is0906AdLimit():Boolean{
+        return showed0906Num>= maxShow0906|| clicked0906Num>= maxClick0906
+    }
+
+    fun updateClickNum(){
+        clicked0906Num++
+        MMKV.defaultMMKV().encode(getLimit0906Key("clicked0906Num"), clicked0906Num)
+    }
+
+    fun updateShowNum(){
+        showed0906Num++
+        MMKV.defaultMMKV().encode(getLimit0906Key("showed0906Num"), showed0906Num)
+    }
+
     fun getAdStr():String{
         val ad = MMKV.defaultMMKV().decodeString("space0906_ad")
         return if (ad.isNullOrEmpty()) Conf0906.AD_0906 else ad

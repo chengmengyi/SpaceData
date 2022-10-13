@@ -36,6 +36,10 @@ object Load0906AdManager {
                 }
             }
         }
+        if (Load0906ConfManager.is0906AdLimit()){
+            logDog("$adLoca is limit")
+            return
+        }
 
         val ad0907List = getAd0907List(adLoca)
         if (ad0907List.isNullOrEmpty()){

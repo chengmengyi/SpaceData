@@ -79,7 +79,7 @@ class Ac0906Server:AcBase0906(R.layout.ac_0906_server) {
     override fun onBackPressed() {
         val adRes = Load0906AdManager.getAdRes(Ad0907Loca.BACK)
         if (adRes!=null){
-            showconnect.show()
+            showconnect.show {  }
             return
         }
         finish()
